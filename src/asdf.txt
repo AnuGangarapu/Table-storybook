@@ -1,0 +1,155 @@
+from this file props are going to joblist Body , after clicking row in the joblist body the scrolledList data not  updating immediately when i scroll it the  newRow is coming after scroll up or down not immediately it is coming 
+
+export default function ListTable(props) {
+  const [scrolledListData, setScrolledListData] = React.useState(props.listData);
+
+  return (
+    <div className={classes.tableContainer}>
+    
+      <div className={classes.table}>
+        <TableVirtuoso
+          
+          data={scrolledListData}
+          components={TableComponents}
+          fixedHeaderContent={() => (
+            <TableHead>
+              <div >
+            
+              />}
+                <Accordion expanded={true} >
+                  <AccordionSummary>
+                    <TableRow>
+                      {columns[0].row.map((headCell) => (
+                        <TableCell
+                         
+                          key={headCell.id}
+                         
+                        >
+                          <div>
+                            <span >
+                             
+                              {headCell.label}
+                            </span>
+                            {headCell.filter && (
+                              <FilterListIcon
+                           
+                              />
+                            )}
+                          </div>
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  </AccordionSummary>
+                
+                </Accordion>
+              </div>
+            </TableHead>
+          )}
+          itemContent={(index, item) => {
+         
+            return (
+              <Joblisttablebody
+                data={item}
+                columns={columns}
+                accordionFullOpen={fullAccordianOpen}
+                index={index}
+                checkbox={checkbox}
+                headerCheckbox={headerCheckbox}
+                hover={hover}
+                AddRow={AddRow}
+              />
+            );
+          }}
+        />
+      </div>
+    </div>
+  );
+}
+After clicking row in this scrolledList data updating row is adding but the row is showing only in scroll up or scroll down ,immediately it should come but it is not coming
+export default function Joblisttablebody(props) {
+  
+ 
+  const [data, setData] = useState(props.data);
+  
+  const { columns, index, checkbox,   } = props;
+
+  
+  const handleDataUpdate = (name,newValue) => {
+    //console.log('name,value',name,newValue)
+    setData((prevData) => ({
+      ...prevData,
+      [name]: newValue
+    }));
+  };
+
+const handleAddItem=(event,index)=>{
+  props.AddRow(index)
+}
+
+ 
+
+  return (
+    <div  
+     
+    >
+     
+      <div>
+        <Accordion >
+          <AccordionSummary>
+            <TableRow
+             
+            >
+              {columns[0].row.map((column) => {
+                return (
+                  <TableCell
+                    
+                  >
+                
+
+                    {/* {column.id === "jobNo" ? (
+                    <Link
+                      className={`${classes.link} ${classes.TableCellInfo}`}
+                    >
+                      {data[column.id]}
+                    </Link>
+                  ) : column.id !== "srNo" ? (
+                    <Typography className={classes.TableCellInfo}>
+                      {" "}
+                      {data[column.id]}{" "}
+                    </Typography>
+                  ) : (
+                    ""
+                  )} */}
+                    {column.id !== "srNo" ?      <TextField
+                    variant="standard"
+                   disableLine={true}
+                   disabled={true}
+                      style={{ fontFamily: 'Inter', fontSize: '14px' }}
+                     customClass={classes.textField}
+                     handledata={handleDataUpdate}
+                     name={column.id}
+                      value={data[column.id]}
+                     
+                    /> : (
+                      ""
+                    )}
+                  </TableCell>
+                );
+              })}
+            </TableRow>
+          </AccordionSummary>
+        
+        </Accordion>
+
+       
+
+
+
+
+      </div>
+      
+    </div>
+   
+ 
+  );
+}

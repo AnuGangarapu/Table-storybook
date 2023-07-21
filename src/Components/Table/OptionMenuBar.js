@@ -1,43 +1,42 @@
 import React from "react";
-import Paper from '@mui/material/Paper';
-import Button from '@mui/material/Button';
-import { makeStyles } from '@mui/styles';
-import Tooltip from '@mui/material/Tooltip';
-const useStyles = makeStyles({
- 
-icons:{
-  borderRadius: "2rem !important",
-   backgroundColor: "#050e25 !important"
-},
-button:{
-  color:'#ffffff !important'
-}
-});
+import OptionPaper from "./OptionMenuIcon";
+import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
+import UnfoldLessIcon from "@mui/icons-material/UnfoldLess";
+import ControlPointDuplicateIcon from "@mui/icons-material/ControlPointDuplicate";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
-export default function OptionPaper(props) {
-  const classes = useStyles(); 
- 
-  const { OptionMenu } = props;
- 
- 
+
+export const MenuBar1 = (props) => {
+  const { accordionOpen, setAccordionOpen } = props;
+
+
+  let AccordionOpen = accordionOpen;
+
+  const handleChange = () => {
+    let accordion = !accordionOpen;
+    setAccordionOpen(accordion);
+  };
+
+  const JoblistMenu = [
+    {
+      name: "UnfoldMoreIcon",
+      icon: AccordionOpen ? <UnfoldLessIcon style={{height:"16px",width:"16px",color:'#CDCFD3'}}/> : <UnfoldMoreIcon style={{height:"16px",width:"16px",color:'#CDCFD3'}}/>,
+      onClick: handleChange,
+      showTooltip: true,
+      toolTipName: "Collapse",
+    },
+    {
+      name: "Delete",
+      icon: <DeleteIcon style={{height:"16px",width:"16px",color:'#CDCFD3'}}/>,
+      showTooltip: true,
+      toolTipName: "Delete",
+    },
+  ];
+
   return (
-    <div>
-      <Paper style={{  }} className={classes.icons} >
-      {OptionMenu.map((name) => (
-    name.showTooltip ? (
-      <Tooltip title={name.toolTipName} arrow>
-        <Button className={classes.button} onClick={name.onClick}>
-          {name.icon}
-        </Button>
-      </Tooltip>
-    ) : (
-      <Button   className={classes.button} onClick={name.onClick}>
-        {name.icon}
-      </Button>
-    )
-  ))}
-      </Paper>
-    </div>
+    
+      <OptionPaper OptionMenu={JoblistMenu} AccordionOpen={AccordionOpen} />
+    
   );
-}
+};

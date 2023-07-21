@@ -1,49 +1,57 @@
 import React from "react";
-import OptionPaper from "./OptionMenuBar.js";
-import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
-import UnfoldLessIcon from "@mui/icons-material/UnfoldLess";
-import ControlPointDuplicateIcon from "@mui/icons-material/ControlPointDuplicate";
-import { makeStyles } from '@mui/styles';
+import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
+import { makeStyles } from "@mui/styles";
+import Tooltip from '@mui/material/Tooltip';
 import Grid from "@mui/material/Grid";
-
 
 const useStyles = makeStyles({
   iconContainer: {
-   display:'inline-block !important'
+    display: "inline-block !important",
+   
+  },
+  icons:{
+    borderRadius: " 24px !important",
+     backgroundColor: "#050E25 !important",
+     padding:"4px 16px 4px 16px !important",
+     minHeight:'20px !important',
+    
+   
+  },
+  button:{
+    color:'#ffffff !important',
+    minWidth:'20px !important',
+    height:'15px',
+    '& .MuiSvgIcon-root':{
+
+      height:"16px",
+      width:"16px",
+      color:'#CDCFD3'
+    }
   }
 });
 
-
-   
-
-
-export const MenuBar1=(props) => {
-    const {accordionOpen,setAccordionOpen}=props
-    const classes = useStyles(); 
-   
-    let AccordionOpen = accordionOpen;
-    
-    const handleChange = () => {
-        
-        let accordion =!accordionOpen
-        setAccordionOpen(accordion)   
-        };
-
-
-    const JoblistMenu = [
-        { name: "UnfoldMoreIcon",icon:AccordionOpen?<UnfoldLessIcon/>:<UnfoldMoreIcon/>, onClick: handleChange ,showTooltip:true,toolTipName:'Collapse' },
-        { name: "ControlPointDuplicateIcon",icon:<ControlPointDuplicateIcon/> ,showTooltip:true,toolTipName:'Duplicate'}
-        
-      ];
-
-
-
-    return (
-    <Grid className={classes.iconContainer}  > 
-    <OptionPaper OptionMenu={JoblistMenu} AccordionOpen={AccordionOpen}   />
-    </Grid>
+export default function OptionPaper(props) {
   
-    
+  const { OptionMenu } = props;
+  const classes = useStyles();
+  return (
+    <Grid className={classes.iconContainer}>
+        <Paper className={classes.icons} >
+      {OptionMenu.map((name) => (
+    name.showTooltip ? (
+      <Tooltip title={name.toolTipName} arrow>
+        <Button className={classes.button} onClick={name.onClick}>
+          {name.icon}
+        </Button>
+      </Tooltip>
+    ) : (
+      <Button   className={classes.button} onClick={name.onClick}>
+        {name.icon}
+      </Button>
     )
-    
-    }
+  ))}
+      </Paper>
+    </Grid>
+  );
+}
