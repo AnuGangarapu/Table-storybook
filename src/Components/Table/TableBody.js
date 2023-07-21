@@ -213,6 +213,9 @@ export default function Joblisttablebody(props) {
 const handleAddItem=(event,index)=>{
   props.AddRow(index)
 }
+const handleDelete=(index)=>{
+  props.handleDeleteRow(index)
+}
 
   const handleCheckbox = () => {
     setCheckedBox(!checkedCheckbox);
@@ -356,6 +359,8 @@ const handleAddItem=(event,index)=>{
             <MenuBar1
               accordionOpen={accordionOpen}
               setAccordionOpen={setAccordionOpen}
+              handleDelete={handleDelete}
+              index={index}
             />
           </span>
         ) : null}
@@ -368,7 +373,8 @@ const handleAddItem=(event,index)=>{
     </div>
     {true   ? (
           <Grid style={{height:"16px",display: "flex", justifyContent:"center",alignItems:"center", }} 
-          onMouseEnter={() => setIsHovered(true)}  onMouseLeave={() => setIsHovered(false)}>
+          // onMouseEnter={() => setIsHovered(true)}  onMouseLeave={() => setIsHovered(false)}
+          >
          <Divider sx={{backgroundColor:"blue",marginLeft:"5px",width:'100%'}}/>
          <AddIcon className={classes.addIcon} onClick={(event) => handleAddItem(event, index)} />
           </Grid>

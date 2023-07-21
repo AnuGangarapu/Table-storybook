@@ -230,6 +230,10 @@ export default function ListTable(props) {
 
     // setScrolledListData(newData);
   };
+  const handleDeleteRow=((index)=>{
+    props.deletingRow(index)
+
+  })
 
   return (
     <div className={classes.tableContainer}>
@@ -337,6 +341,7 @@ export default function ListTable(props) {
                 headerCheckbox={headerCheckbox}
                 hover={hover}
                 AddRow={handleAddRow}
+                handleDeleteRow={handleDeleteRow}
               />
             );
           }}

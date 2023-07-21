@@ -8,7 +8,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 
 export const MenuBar1 = (props) => {
-  const { accordionOpen, setAccordionOpen } = props;
+  const { accordionOpen, setAccordionOpen,index, handleDelete} = props;
+
 
 
   let AccordionOpen = accordionOpen;
@@ -17,6 +18,9 @@ export const MenuBar1 = (props) => {
     let accordion = !accordionOpen;
     setAccordionOpen(accordion);
   };
+  const deleteItem=((index)=>{
+    props.handleDelete(index)
+  })
 
   const JoblistMenu = [
     {
@@ -31,6 +35,7 @@ export const MenuBar1 = (props) => {
       icon: <DeleteIcon style={{height:"16px",width:"16px",color:'#CDCFD3'}}/>,
       showTooltip: true,
       toolTipName: "Delete",
+      onClick:deleteItem
     },
   ];
 

@@ -27,12 +27,17 @@ function TableVirtuoso(props) {
       // setData(presentRows);
      
       }
+      const deletingRow=((index)=>{
+        props.deleteItem(index)
+        console.log('deleting Function is calling')
+
+      })
    
     return (
       <>
     {fullAccordianOpen===true?<UnfoldLessIcon   onClick={()=>handleChange()}/>:<UnfoldMoreIcon   onClick={()=>handleChange()}/>}
     
-      <ListTable columns={props.columns}   listData={listData} accordion={fullAccordianOpen} checkbox={props.checkbox} hover={props.hover}  setListData={setListData}/>
+      <ListTable columns={props.columns} deletingRow={deletingRow}  listData={listData} accordion={fullAccordianOpen} checkbox={props.checkbox} hover={props.hover}  setListData={setListData} />
       
       </>
    

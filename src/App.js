@@ -180,11 +180,22 @@ function App() {
     
     
   };
+  const deleteItem=(index)=>{
+    const updatedListData = [...listData];
+    
+    let newItem={jobCreationDate:'21/09/2023'}
+     updatedListData.splice(index + 1, 1);
+ 
+    
+     setItem(updatedListData);
+     console.log('it is updating')
+
+  }
   
   
  
   return (
-  <TableVirtuoso columns={importColumns2}  listData={listData}    checkbox={true} hover={true}  setListDataItem={setListDataItem} />
+  <TableVirtuoso columns={importColumns2}  deleteItem={deleteItem} listData={listData}    checkbox={true} hover={true}  setListDataItem={setListDataItem} />
   );
 }
 
