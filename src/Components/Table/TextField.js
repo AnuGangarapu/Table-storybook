@@ -103,7 +103,7 @@ const TextFields = (props) => {
   const [data, setData] = useState(value)
   const [disable, setDisable] = React.useState(disableLine)
   // console.log(style)
-  // console.log(props.classNames)
+  console.log(props.classNames)
 
   // React.useEffect(()=>{
   //   setData(props.value)
